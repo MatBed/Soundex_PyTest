@@ -1,6 +1,8 @@
 import SoundexData
 import itertools
 import string
+import abc
+
 
 class SoundexAlgorithm():
 
@@ -69,4 +71,22 @@ class SoundexAlgorithm():
             if valueOfFirstChar == valueOfSecondChar:
                 return True
 
+        return False
+
+
+class ISaveData():
+    def SaveWord(self, word):pass
+
+class DataContaioner:
+    dataContainer = ISaveData()
+
+    def __init__(self):pass
+
+    def __init__(self, data):
+        self.dataContainer = data
+
+    def Save(self, word):
+        if word != "":
+            self.dataContainer.SaveWord(word)
+            return True
         return False

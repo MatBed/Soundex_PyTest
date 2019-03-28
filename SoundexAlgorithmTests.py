@@ -1,4 +1,7 @@
 import SoundexAlgorithm
+from SoundexAlgorithm import ISaveData, DataContaioner
+import pytest
+from mock import Mock
 
 def test_WhenTheWordIsEmptyReturn0000():
     soundex = SoundexAlgorithm.SoundexAlgorithm()
@@ -104,3 +107,15 @@ def test_WhentTheWordIsHoneymanThenReturnH555():
     soundex = SoundexAlgorithm.SoundexAlgorithm()
     encodeword = soundex.Encode("Honeyman")
     assert encodeword == "h555"
+
+def test_MockTest():
+    mock = Mock(spec=ISaveData)
+    datacontainer = DataContaioner(mock)
+    datacontainer.Save("abcd")
+    mock.SaveWord.assert_called_with("abcd")
+
+def test_MockTestvol2():
+    mock = Mock(spec=ISaveData)
+    mock.SaveWord("abcd").return_value = True
+    datacontainer = DataContaioner(mock)
+    assert datacontainer.Save("abcd") == True
